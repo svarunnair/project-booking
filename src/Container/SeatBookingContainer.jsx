@@ -7,6 +7,7 @@ import Legend from "../components/Legend";
 const { Title } = Typography;
 
 export default function SeatBookingContainer() {
+  console.log(' ')
   return (
     <Row justify="center">
       <Col xs={24} md={20} lg={16}>
