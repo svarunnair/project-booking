@@ -1,22 +1,17 @@
 import { Card, Row, Col, Typography } from "antd";
-import { seats } from  '../data/seat.js';
-import SeatRow from "../components/SeatRow";
-import Screen from "../components/Screens.jsx";
+import Screen from "../components/Screens";
 import Legend from "../components/Legend";
 
 const { Title } = Typography;
 
 export default function SeatBookingContainer() {
-
-
-
   const seatLayout = [
     {
       row: "A",
       seats: Array.from({ length: 12 }, (_, i) => ({
         id: `A${i + 1}`,
         number: i + 1,
-        status: "available", // available | booked | selected
+        status: "available",
       })),
     },
     {
@@ -44,7 +39,7 @@ export default function SeatBookingContainer() {
       })),
     },
   ];
-  
+
   return (
     <Row justify="center">
       <Col xs={24} md={20} lg={16}>
@@ -61,7 +56,6 @@ export default function SeatBookingContainer() {
               padding: 16,
               borderRadius: 8,
               marginTop: 16,
-              justifyContent: "center",
               alignItems: "center",
             }}
           >
@@ -71,7 +65,7 @@ export default function SeatBookingContainer() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  marginBottom: 12,
+                  marginBottom: 16,
                 }}
               >
                 {/* Row Label */}
@@ -79,42 +73,61 @@ export default function SeatBookingContainer() {
                   style={{
                     width: 30,
                     fontWeight: "bold",
+                    marginRight: 10,
                   }}
                 >
                   {row.row}
                 </div>
 
                 {/* Seats */}
-                <div style={{ display: "flex", gap: 8 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 8,
+                  }}
+                >
                   {row.seats.map((seat) => (
                     <div
                       key={seat.id}
-                      onClick={() => alert(`Seat ${seat.id}`)}
                       style={{
-                        width: 25,
-                        height: 25,
-                        border: "1px solid #b42b2b",
-                        borderTopLeftRadius: 8,
-                        borderTopRightRadius: 8,
-                        backgroundColor:
-                          seat.status === "booked"
-                            ? "#d9d9d9"
-                            : seat.status === "selected"
-                              ? "#52c41a"
-                              : "#fff",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                         cursor:
                           seat.status === "booked" ? "not-allowed" : "pointer",
                       }}
-                    />
+                    >
+                      <div
+                        onClick={() => alert(`Seat ${seat.id}`)}
+                        style={{
+                          width: 28,
+                          height: 28,
+                          border: "1px solid #b42b2b",
+                          borderTopLeftRadius: 8,
+                          borderTopRightRadius: 8,
+                          backgroundColor:
+                            seat.status === "booked"
+                              ? "#d9d9d9"
+                              : seat.status === "selected"
+                                ? "#52c41a"
+                                : "#fff",
+                        }}
+                      />
+
+                      <span
+                        style={{
+                          fontSize: 10,
+                          marginTop: 4,
+                        }}
+                      >
+                        {seat.id}
+                      </span>
+                    </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
-
-          {/* {seats.map((row) => (
-            <SeatRow key={row.row} row={row} />
-          ))} */}
 
           <Legend />
         </Card>
